@@ -61,7 +61,7 @@ def plot_gridded_data(df, grid, fig_path):
     
     cmap = mpl.colors.ListedColormap(['blue', 'cyan', 'green','yellow', 'orange', 'red'])
     
-    plt.scatter(lon, lat, c=t, cmap=cmap, marker='s',linewidth=0.2, s=0.6,vmin=1, vmax=10000) 
+    plt.scatter(lon, lat, c=t, cmap=cmap, marker='s',linewidth=0.2, s=0.6,vmin=1, vmax=500) 
     #plt.xticks(lon)
 
 #    plt.xlabel('Longitude [degrees]')
@@ -76,9 +76,10 @@ def plot_gridded_data(df, grid, fig_path):
     
     # define the bins and normalize
     #bounds = [0,1,100,1000,10000,20000,100000] # decade all vars
-    bounds = [0,1,2,5,10,100,1000,10000] # decade single vars
+    #bounds = [0,1,2,5,10,100,1000,10000] # decade single vars
     #bounds = [0,1,10,100,1000,10000,100000,1000000] # 1900-2020
     #bounds = [0,1,10,100,200,500,1000] # decade single vars in depth layer
+    bounds = [0,1,2,5,10,50,100,500] # decade stations
     norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
     cbar = plt.colorbar(
         mpl.cm.ScalarMappable(cmap=cmap, norm=norm),
@@ -98,7 +99,7 @@ def plot_gridded_data(df, grid, fig_path):
     fig.savefig(fig_path, bbox_inches='tight', dpi=800)
 
 
-file_path = '/test_data/WOD/csv_v01/wod_2007_z[4000, 6000]_Oxygen.csv'
+file_path = '/test_data/WOD/csv_v01/wod_2018_Oxygen_z[1000, 4000]_stations.csv'
 df = load_point_layer(file_path)
 grid, df = create_data_grid(df)
 fig_name = file_path.split('/')[-1][:-4]

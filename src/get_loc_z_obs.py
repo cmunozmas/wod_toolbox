@@ -18,7 +18,7 @@ month = []
 var_qc = True
 z_layer = [[0,200],[200,1000],[1000,4000],[4000,6000],[6000,11000]]
 #z_layer = [[4000,6000]]
-var_to_process = ['Oxygen']
+var_to_process = ['pCO2']
 var_sufix = '_row_size'
 qc_sufix = '_WODprofileflag'
 
