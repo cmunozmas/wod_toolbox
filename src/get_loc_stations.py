@@ -18,8 +18,8 @@ import multiprocessing as mp
 #year_start = 2018
 #year_end = 2020
 file_path = r'/test_data/WOD/csv_v01/'
-
-timestamp = [(1981,1991),(1991,2001),(2001,2011),(2011,2021)]
+timestamp = [(1900,2020)]
+#timestamp = [(1981,1991),(1991,2001),(2001,2011),(2011,2021)]
 platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
 #platforms = ['ctd']
 
@@ -37,8 +37,7 @@ def process_platforms(year_start, year_end, platforms, file_path, output):
             try:
                 with netCDF4.Dataset(url) as nc:
                     d = {'lat': nc.variables['lat'][:], 
-                         'lon': nc.variables['lon'][:], 
-                         'date': nc.variables['date'][:], 
+                         'lon': nc.variables['lon'][:],  
                          }
     
                     d['obs_num_all'] = [1] * len(d['lat'])

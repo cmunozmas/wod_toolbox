@@ -79,7 +79,7 @@ def plot_gridded_data(df, grid, fig_path):
     #bounds = [0,1,2,5,10,100,1000,10000] # decade single vars
     #bounds = [0,1,10,100,1000,10000,100000,1000000] # 1900-2020
     #bounds = [0,1,10,100,200,500,1000] # decade single vars in depth layer
-    bounds = [0,1,2,5,10,50,100,500] # decade stations
+    bounds = [0,1,2,5,10,50,60,500] # decade stations
     norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
     cbar = plt.colorbar(
         mpl.cm.ScalarMappable(cmap=cmap, norm=norm),
@@ -99,7 +99,7 @@ def plot_gridded_data(df, grid, fig_path):
     fig.savefig(fig_path, bbox_inches='tight', dpi=800)
 
 
-file_path = '/test_data/WOD/csv_v01/wod_2018_Oxygen_z[1000, 4000]_stations.csv'
+file_path = '/test_data/WOD/csv_v01/wod_1900-2019_stations.csv'
 df = load_point_layer(file_path)
 grid, df = create_data_grid(df)
 fig_name = file_path.split('/')[-1][:-4]
