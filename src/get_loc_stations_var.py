@@ -44,7 +44,7 @@ def process_platforms(var, year_start, year_end, platforms, file_path, output):
                          }
                     
                     for i in range(0,len(d['var'])):
-                        if d['var'][i] == 0:   
+                         if isinstance(d['var'][i], np.ma.core.MaskedConstant):   
                             d['lat'][i] = np.nan
                             d['lon'][i] = np.nan
     

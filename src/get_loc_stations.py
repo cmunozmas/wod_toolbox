@@ -18,7 +18,7 @@ import multiprocessing as mp
 #year_start = 2018
 #year_end = 2020
 file_path = r'/test_data/WOD/csv_v01/'
-timestamp = [(1900,2020)]
+timestamp = [(2001,2011)]
 #timestamp = [(1981,1991),(1991,2001),(2001,2011),(2011,2021)]
 platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
 #platforms = ['ctd']
@@ -43,7 +43,7 @@ def process_platforms(year_start, year_end, platforms, file_path, output):
                     d['obs_num_all'] = [1] * len(d['lat'])
                     df_dum = pd.DataFrame(columns=columns, data=d)
                     df = pd.concat([df, df_dum])
-                    df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
+                    #df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
                     print (str(year) + '-' + platform)
             except Exception:
                 pass  # or you could use 'continue'
