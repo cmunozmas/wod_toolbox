@@ -151,18 +151,28 @@ for z in z_layer:
                     z_maxs.append(cast_z_max)
                     cast_z_min = min(cast_bins)
 
-#                    if z[0] < cast_z_max < z[1]:
-#                        if isinstance(d['var'][station_idx], np.ma.core.MaskedConstant):
-#                            num_count_station.append(0)
-#                        else:
-#                            num_count_station.append(1)
-
-                    if z[0] < cast_z_max < z[1]:
+                    if cast_z_max < z[0]:
+                        num_count_station.append(0)
                         
-                        if d['var'][station_idx]:                            
+                    elif z[0] < cast_z_max < z[1]:    
+                        if d['var'][station_idx]:
                             num_count_station.append(1)
                         else: 
-                            num_count_station.append(0)
+                            num_count_station.append(0) 
+                            
+                    elif cast_z_max > z[1]:
+                        if d['var'][station_idx]:
+                            num_count_station.append(1)
+                        else: 
+                            num_count_station.append(0) 
+                            
+
+#                    if z[0] < cast_z_max < z[1]:                        
+#                        
+#                        if d['var'][station_idx]:                            
+#                            num_count_station.append(1)
+#                        else: 
+#                            num_count_station.append(0)
 
                     else: 
                         num_count_station.append(0)
