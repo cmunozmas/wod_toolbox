@@ -15,18 +15,18 @@ import matplotlib.pyplot as plt
 
 year = 2018
 month = []
-var_qc = True
-z_layer = [[0,200],[200,1000],[1000,4000],[4000,6000],[6000,11000]]
-#z_layer = [[4000,6000]]
-var_to_process = ['pCO2']
+var_qc = False
+#z_layer = [[0,200],[200,1000],[1000,4000],[4000,6000],[6000,11000]]
+z_layer = [[1000,4000]]
+var_to_process = ['Oxygen']
 var_sufix = '_row_size'
 qc_sufix = '_WODprofileflag'
 
 
 file_out_path = r'/test_data/WOD/csv_v01/'
 
-platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
-#platforms = ['ctd']
+#platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
+platforms = ['ctd']
 
 
 def clean_vars_nc_list(v, vars_nc_list):
@@ -83,7 +83,8 @@ def process_platform(var_to_process, vars_nc_list, nc, year, platform, z):
             cast_bins = z_depth[cast_idx:cast_idx+z_obs[station_idx]]
             cast_z_max = max(cast_bins)
             cast_z_min = min(cast_bins)
-            if z[1] < cast_z_max or z[0] > cast_z_min:
+            #if z[1] < cast_z_max or z[0] > cast_z_min:
+            if z[0] < cast_z_max < z[1]:
                 obs_num_count_station = count_observations_in_depth_range(cast_bins, var_obs[station_idx], obs_num_count_station, z)
             else: 
                 obs_num_count_station.append(0)
@@ -117,7 +118,7 @@ for z in z_layer:
             df_platform = df_platform[df_platform['obs_num_all'] !=0]
             frames = [df, df_platform]
             df = pd.concat(frames)            
-            df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
+#            df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
 
             print (str(year) + '  -  ' + platform + '  -  ' + str(z) + ' END')
         except Exception as e:

@@ -13,17 +13,17 @@ import multiprocessing as mp
 
 file_path = r'/test_data/WOD/csv_v01/'
 
-timestamp = [(2011,2021)]
-platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
-vars_nc_list = ['Temperature_row_size', 'Salinity_row_size', 'Oxygen_row_size', 
-                'Chlorophyll_row_size', 'pH_row_size', 'Phosphate_row_size', 'Silicate_row_size', 
-                'Nitrate_row_size', 'Alkalinity_row_size', 'tCO2_row_size', 'CFC11_row_size', 
-                'CFC12_row_size', 'CFC113_row_size', 'DeltaC14_row_size', 'Tritium_row_size', 
-                'Helium_row_size', 'DeltaHe3_row_size', 'Neon_row_size', 'DeltaC13_row_size',
-                'pCO2_row_size', 'Oxy18_row_size', 'Pressure_row_size']
-#platforms = ['apb','ctd', 'xbt']
-#vars_nc_list = ['Salinity_row_size','Oxygen_row_size']
-#timestamp = [(2018,2019),(2019,2020)]
+#timestamp = [(2011,2021)]
+#platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
+#vars_nc_list = ['Temperature_row_size', 'Salinity_row_size', 'Oxygen_row_size', 
+#                'Chlorophyll_row_size', 'pH_row_size', 'Phosphate_row_size', 'Silicate_row_size', 
+#                'Nitrate_row_size', 'Alkalinity_row_size', 'tCO2_row_size', 'CFC11_row_size', 
+#                'CFC12_row_size', 'CFC113_row_size', 'DeltaC14_row_size', 'Tritium_row_size', 
+#                'Helium_row_size', 'DeltaHe3_row_size', 'Neon_row_size', 'DeltaC13_row_size',
+#                'pCO2_row_size', 'Oxy18_row_size', 'Pressure_row_size']
+platforms = ['ctd']
+vars_nc_list = ['Oxygen_row_size']
+timestamp = [(2018,2019)]
 
 # Define an output queue
 output = mp.Queue()
@@ -54,7 +54,7 @@ def process_platforms(var, year_start, year_end, platforms, file_path, output):
                     d['obs_num_all'] = [1] * len(d['lat'])
                     df_dum = pd.DataFrame(columns=columns, data=d)
                     df = pd.concat([df, df_dum])
-                    df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
+#                    df = df.groupby(['lon', 'lat'])['obs_num_all'].sum().reset_index()
                     print (str(year) + ' - ' + platform + ' - ' + var)
             except Exception:
                 pass  # or you could use 'continue'

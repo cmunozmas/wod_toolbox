@@ -99,7 +99,7 @@ def plot_gridded_data(df, grid, fig_path):
     fig.savefig(fig_path, bbox_inches='tight', dpi=800)
 
 
-file_path = '/test_data/WOD/csv_v01/wod_1900-2019_stations.csv'
+file_path = '/test_data/WOD/csv_v01/wod_2018_Oxygen_z[0, 1010]_stations.csv'
 df = load_point_layer(file_path)
 grid, df = create_data_grid(df)
 fig_name = file_path.split('/')[-1][:-4]
