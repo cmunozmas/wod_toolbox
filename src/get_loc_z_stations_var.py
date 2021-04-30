@@ -115,7 +115,7 @@ year = 2018
 
 #platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
 platforms = ['ctd']
-z_layer = [[0,1010]]
+z_layer = [[2000,4000]]
 #platforms = ['ctd']
 vars_nc_list = ['Oxygen_row_size']
 #timestamp = [(2018,2019),(2019,2020)]

@@ -36,17 +36,25 @@ def create_data_grid(df):
     grid, _, _ = np.histogram2d(x, y, bins=[gridx, gridy])
     return grid, df
     
-def calculate_zero_coverage(grid):
+def calculate_zero_coverage(grid, z_ref):
     parcels_zeros = (grid == 0).sum()
     parcels_non_zeros = ((grid != 0).sum())
     all_parcels = parcels_zeros + parcels_non_zeros
-    ocean_parcels = all_parcels*71/100
-    percent_no_coverage = ((ocean_parcels - parcels_non_zeros)*100)/ocean_parcels
+    # ocean_parcels = all_parcels*71/100
+    # percent_no_coverage = ((ocean_parcels - parcels_non_zeros)*100)/ocean_parcels
+    areas = {'z0': 42732.3992013888, 'z200': 38973.0732986111, 'z500': 37302.8764583333,'z1000': 36159.5756770833, 'z4000': 20193.0196527777} #area in deg2
+    ref_area = areas[z_ref]
+    percent_no_coverage = ((ref_area - parcels_non_zeros)*100)/ref_area
+    
     return percent_no_coverage
 
 
-def plot_gridded_data(df, grid, fig_path):   
-    percent_no_coverage = calculate_zero_coverage(grid)
+def plot_gridded_data(df, grid, fig_path):
+    fig_name = fig_path.split(sep='/')[-1]
+    z_layer = fig_name.split(sep='_')[3]
+    z_ref_dum = z_layer.split(sep=',')[1][1:-1]
+    z_ref = 'z' + z_ref_dum
+    percent_no_coverage = calculate_zero_coverage(grid, z_ref)
     
     fig = plt.figure()
 
@@ -99,10 +107,10 @@ def plot_gridded_data(df, grid, fig_path):
     fig.savefig(fig_path, bbox_inches='tight', dpi=800)
 
 
-file_path = '/test_data/WOD/csv_v01/wod_2018_Oxygen_z[0, 1010]_stations.csv'
+file_path = '/test_data/WOD/csv_v01/wod_2018_Oxygen_z[2000, 4000]_stations.csv'
 df = load_point_layer(file_path)
 grid, df = create_data_grid(df)
 fig_name = file_path.split('/')[-1][:-4]
-plot_gridded_data(df, grid, '/test_data/WOD/figs/'+fig_name)
+plot_gridded_data(df, grid, '/test_data/WOD/figs/' + fig_name)
 
 

@@ -20,8 +20,8 @@ import multiprocessing as mp
 file_path = r'/test_data/WOD/csv_v01/'
 timestamp = [(2001,2011)]
 #timestamp = [(1981,1991),(1991,2001),(2001,2011),(2011,2021)]
-platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
-#platforms = ['ctd']
+#platforms = ['apb', 'ctd', 'drb', 'gld', 'mbt', 'mrb', 'osd', 'pfl', 'sur', 'uor', 'xbt']
+platforms = ['ctd']
 
 # Define an output queue
 output = mp.Queue()
